@@ -23,9 +23,9 @@ var (
 	MaxSize  int64
 )
 
-func InitSets(readOnly, searchWA bool) {
-	ReadOnly = readOnly
-	SearchWA = searchWA
+func InitSets(options InitSetsOptions) {
+	ReadOnly = options.ReadOnly
+	SearchWA = options.SearchWA
 
 	bboltDB := NewTDB()
 	if bboltDB == nil {

@@ -11,8 +11,19 @@ import (
 	"server/web"
 )
 
-func Start(port, sslport, sslCert, sslKey string, sslEnabled, roSets, searchWA bool) {
-	settings.InitSets(roSets, searchWA)
+func Start(options ServerStartOptions) {
+	settings.InitSets(settings.InitSetsOptions{
+		ReadOnly: options.ReadOnly,
+		SearchWA: options.SearchWA,
+	})
+
+	sslEnabled := options.SslEnabled
+	sslport := options.SslPort
+	sslCert := options.SslCert
+	sslKey := options.SslKey
+	port := options.Port
+	roSets := options.ReadOnly
+	
 	if roSets {
 		log.TLogln("Enabled Read-only DB mode!")
 	}

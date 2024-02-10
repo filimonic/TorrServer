@@ -113,7 +113,15 @@ func main() {
 		}
 	}
 
-	server.Start(params.Port, params.SslPort, params.SslCert, params.SslKey, params.Ssl, params.RDB, params.SearchWA)
+	server.Start(server.ServerStartOptions{
+		Port:       params.Port,
+		SslPort:    params.SslPort,
+		SslCert:    params.SslCert,
+		SslKey:     params.SslKey,
+		SslEnabled: params.Ssl,
+		ReadOnly:   params.RDB,
+		SearchWA:   params.SearchWA,
+	})
 	log.TLogln(server.WaitServer())
 	log.Close()
 	time.Sleep(time.Second * 3)
